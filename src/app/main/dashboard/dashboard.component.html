@@ -1,0 +1,156 @@
+<h3>Salas que sou adm!!</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nome da sala</th>
+      <th scope="col">Local da sala</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of rooms$ | async">
+      <td>{{ item.roomName }}</td>
+      <td>{{ item.roomAdress.address }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onGoToRoom(item)"
+        >
+          Abrir Sala
+        </button>
+        |
+        <button type="button" class="btn btn-primary" (click)="onDelete(item)">
+          Deletar
+        </button>
+        |
+        <a class="btn btn-primary"
+          href="https://wa.me/?text=Acesse%20Nossa%20Sala%20No%20Site%20CaronaJa%20http://localhost:4200/dashboard/{{
+            item.uidRoom
+          }}"
+          target="_blank"
+          >Mandar link</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Salas que sou convidado</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nome da sala</th>
+      <th scope="col">Local da sala</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let objs of roomsConvidado | async">
+      <td>{{ objs.roomName }}</td>
+      <td>{{ objs.roomAdress.address }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onGoToRoom(objs)"
+        >
+          Abrir Sala
+        </button>
+        |
+        <button type="button" class="btn btn-primary" (click)="onSair(objs)">
+          Sair
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- *ngIf="user$|async as user; else login"
+<ng-template #login>
+  <h3>Vá para o login</h3>
+</ng-template> -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Criar Sala!</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="roomName" class="col-form-label">Nome da Sala:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="roomName"
+        [(ngModel)]="room.roomName"
+      />
+    </div>
+    <div class="form-group">
+      <label for="roomAdress" class="col-form-label">Local da Sala: </label>
+      <GooglePlacesComponent (setAddress)="onGetAddress($event)"(setAddress)="onGetEstablishmentAddress($event)"></GooglePlacesComponent>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="onSalvarSala()"
+        (click)="modal.close()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #entrarsala let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Entrar Sala</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="entrarSala" class="col-form-label"
+        >Digite o codigo da sala</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="entrarSala"
+        [(ngModel)]="uidRoomEntrar"
+      />
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="onEntrarSalaUser()"
+        (click)="modal.close()"
+      >
+        Entrar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+  Criar Sala
+</button>
+
+<button class="btn btn-lg btn-outline-primary" (click)="openSala(entrarsala)">
+  Entrar Sala
+</button>

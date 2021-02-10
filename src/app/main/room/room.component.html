@@ -1,0 +1,81 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nome do Participante</th>
+      <th scope="col">Local Destino</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of members | async">
+      <td>{{ item.displayName }}</td>
+      <td>{{ item.homeAdress.address }}</td>
+      <div
+        class="btn-group btn-group-toggle"
+        ngbRadioGroup
+        name="radioBasic"
+        [(ngModel)]="item.driver"
+      >
+        <label ngbButtonLabel class="btn-primary">
+          <input
+            (click)="onDriveOrRide(item, 0)"
+            ngbButton
+            type="radio"
+            [value]="false"
+          />
+          Carona
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="true" /> Motorista
+        </label>
+        <div>
+          <div
+            *ngIf="item.driver == true"
+            class="btn-group"
+            ngbDropdown
+            role="group"
+            aria-label="Button group with nested dropdown"
+          >
+            <button class="btn btn-outline-primary" ngbDropdownToggle>
+              Lugares: {{item.ride}}
+            </button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button ngbDropdownItem (click)="onDriveOrRide(item, 1)">
+                1
+              </button>
+              <button ngbDropdownItem (click)="onDriveOrRide(item, 2)">
+                2
+              </button>
+              <button ngbDropdownItem (click)="onDriveOrRide(item, 3)">
+                3
+              </button>
+              <button ngbDropdownItem (click)="onDriveOrRide(item, 4)">
+                4
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </tr>
+  </tbody>
+
+  <!-- <tr *ngFor="let item of rooms$ | async" >
+      <td>{{item.roomName}}</td>
+      <td>{{item.roomAdress}}</td>
+    </tr> -->
+</table>
+<div *ngIf="admUserRoom; else wait">
+  <button class="btn btn-primary">Match NOW!</button>
+</div>
+
+<ng-template #wait>
+  <button
+    type="button"
+    class="btn btn-primary"
+    disabled
+    data-bs-toggle="button"
+  >
+    Wait for adm!
+  </button>
+</ng-template>
