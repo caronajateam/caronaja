@@ -26,6 +26,7 @@
     "@popperjs/core": "^2.6.0",
     "@types/googlemaps": "^3.39.12",
     "bootstrap": "^4.5.3",
+    "express": "^4.17.1",
     "firebase": "^8.2.3",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
