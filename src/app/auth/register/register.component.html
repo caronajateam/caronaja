@@ -1,38 +1,53 @@
 <div class="row">
-  <div class="col-md-6 mx-auto mt-5">
+  <div class="col-md-5 mx-auto mt-5 mb-5">
     <div class="card">
       <div class="card-body">
-        <h1 class="text-center">REGISTER</h1>
+        <h1 class="text-center text-danger font-weight-bold">REGISTRAR</h1>
+        <hr class="bg-danger mt-0 mb-2 d-inline-block mx-auto ln-red-2" />
         <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" formControlName="email">
+            <input type="email" class="form-control" formControlName="email" />
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" formControlName="password">
+            <label for="password">Senha</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
           </div>
           <div class="form-group">
             <label for="displayName">Nome Completo</label>
-            <input type="text" class="form-control" formControlName="displayName">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="displayName"
+            />
           </div>
           <div class="form-group">
             <label for="telefone">Telefone</label>
             <input type="text" placeholder="(47)98464-0015" class="form-control" formControlName="number">
           </div>
           <div class="form-group">
-            <label for="homeAdress">Enderço de Casa</label>
+            <label for="homeAdress">Endereço de Casa</label><br>
             <GooglePlacesComponent (setAddress)="onGetAddressHome($event)" adressType="geocode"></GooglePlacesComponent>
           </div>
           <div class="form-group">
-            <label for="workAdress">Endereço do trabalho</label>
+            <label for="workAdress">Endereço do trabalho</label><br>
             <GooglePlacesComponent (setAddress)="onGetAddressWork($event)" adressType="geocode"></GooglePlacesComponent>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+          <button type="submit" class="btn btn-danger btn-lg btn-block mt-3">
+            Register
+          </button>
         </form>
         <div class="form-group mt-3">
-          <p>Do you have an account? <a [routerLink]="['/login']"> Login</a></p>
-         </div>
+          <p>
+            Já tem um conta?<a class="text-danger" [routerLink]="['/login']"
+              ><span class="ml-2">Entrar</span></a
+            >
+          </p>
+        </div>
       </div>
     </div>
   </div>

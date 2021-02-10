@@ -22,6 +22,8 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { RoomComponent } from './main/room/room.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -38,7 +40,9 @@ import { RoomComponent } from './main/room/room.component';
     ForgotPasswordComponent,
     HomeComponent,
     DashboardComponent,
-    RoomComponent
+    RoomComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

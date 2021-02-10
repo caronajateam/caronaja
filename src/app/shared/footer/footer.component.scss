@@ -1,0 +1,20 @@
+.ln-sobre-site {
+  width: 103px;
+  height: 2px;
+}
+
+.ln-links-uteis {
+  width: 94px;
+  height: 2px;
+}
+
+.ln-contato {
+  width: 72px;
+  height: 2px;
+}
+
+@media (min-width: 2px) {
+  .about-footer-mobile {
+    display: none;
+  }
+}

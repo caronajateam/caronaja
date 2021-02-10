@@ -1,3 +1,5 @@
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserPathGuard } from './auth/user-path.guard';
@@ -18,6 +20,14 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   },
   {
     path: 'login',

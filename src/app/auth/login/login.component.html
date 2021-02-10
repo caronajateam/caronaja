@@ -1,25 +1,39 @@
 <div class="row">
-  <div class="col-md-6 mx-auto mt-5">
+  <div class="col-md-4 mx-auto mt-5 mb-5">
     <div class="card">
       <div class="card-body">
-        <h1 class="text-center">LOGIN</h1>
+        <h1 class="text-center text-danger font-weight-bold">ENTRAR</h1>
+        <hr class="bg-danger mt-0 mb-2 d-inline-block mx-auto ln-red-2" />
         <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" formControlName="email">
+            <input type="email" class="form-control" formControlName="email" />
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" formControlName="password">
+            <label for="password">Senha</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
           </div>
-          <button class="btn btn-primary btn-lg btn-block" >Login</button>
+          <button class="btn btn-danger btn-lg btn-block mt-3">Login</button>
         </form>
         <div class="form-group mt-3">
-         <p>Create an account! <a routerLink="/register"> Register</a></p>
+          <p>
+            Não tem uma Conta?
+            <a class="text-danger" routerLink="/register">
+              <span class="ml-2">Registre-se</span></a
+            >
+          </p>
         </div>
         <div class="form-group mt-1">
-          <p> <a routerLink="/forgot-password"> Forgot password?</a></p>
-         </div>
+          <p>
+            <a class="text-danger" routerLink="/forgot-password">
+              Esqueceu sua Senha?</a
+            >
+          </p>
+        </div>
       </div>
     </div>
   </div>

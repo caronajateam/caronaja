@@ -1,19 +1,25 @@
-<div class="card mt-3 " *ngIf="user$ |async as user; else loading">
-  <div class="card-body">
-    <h3 class="card-title text-center">Thank you for Registering</h3>
-    <div class="form-group">
-      <p class="text-center">
-        We have sent a confirmation email to <strong>{{user?.email}}</strong>
-      </p>
-      <p class="text-center">
-        Please check your email and click on the link to verify you email address.
-      </p>
-      <div class="form-group text-center mt-1">
-        <button class="btn btn-primary" (click)="onSendEmail()"> Resend verification email</button>
+<div class="row">
+  <div class="col-md-6 mx-auto mt-5 mb-5">
+    <div class="card" *ngIf="user$ | async as user; else loading">
+      <div class="card-body">
+        <h3 class="card-title text-center">Obrigado por Registrar-se!</h3>
+        <div class="form-group">
+          <p class="text-center">
+            Nós enviamos um email de confirmação para
+            <strong>{{ user?.email }}</strong>
+          </p>
+          <p class="text-center">
+            Por favor, cheque seu email e clique no link para verificar o seu
+            endereço de email.
+          </p>
+          <div class="form-group text-center mt-1">
+            <button class="btn btn-danger" (click)="onSendEmail()">
+              Reenviar email de verificação
+            </button>
+          </div>
+        </div>
       </div>
     </div>
+    <ng-template #loading> Carregando... </ng-template>
   </div>
 </div>
-<ng-template #loading>
-  Loading...
-</ng-template>
