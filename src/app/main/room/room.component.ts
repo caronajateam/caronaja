@@ -1,3 +1,4 @@
+import { GoogleGetaddressService } from './../../shared/googlemaps/google-places/google-getaddress.service';
 import { User } from './../../shared/model/user.interface';
 import { Observable } from 'rxjs';
 import { Router, NavigationExtras } from '@angular/router';
@@ -38,10 +39,25 @@ export class RoomComponent implements OnInit {
     private authSvc: AuthService,
     private modalService: NgbModal,
     private mainSvc: MainService,
-    private router: Router
+    private router: Router,
+    private googleService:GoogleGetaddressService
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.room.uidRoom = navigation?.extras?.state?.value;
+  }
+
+  getDistanceOfTheMembers(){
+    // this.googleApiService.getDistance(this.origins,this.destinations).subscribe(
+    //   (resp:any) =>{
+    //     console.log(resp)
+    //   }
+    // )
+    this.googleService.getDistance("RuaAntonioZendron,216",["RuaGetulioVargas90"]).subscribe(
+        (resp:any) =>{
+           console.log(resp)
+         }
+       )
+
   }
 
   ngOnInit(): void {

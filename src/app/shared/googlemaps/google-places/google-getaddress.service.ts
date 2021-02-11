@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../../../auth/services/auth.service';
 import { Injectable, NgZone } from '@angular/core';
 
@@ -15,7 +16,15 @@ export class GoogleGetaddressService {
   establishmentAddress: string | any;
   formattedEstablishmentAddress: string | any;
 
-  constructor(private authSvc: AuthService, private zone: NgZone) {}
+  constructor(private authSvc: AuthService, private zone: NgZone,private http:HttpClient) {}
+
+
+  baseUrlApiGetDestination:string = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=';
+
+  getDistance(origins:string,destination:string[]){
+    let urlApi = this.baseUrlApiGetDestination + origins+"Blumenau&destinations="+destination+"Blumenau|" + "&language=pt-BR&key=AIzaSyB43xdCiRB2Oe23bTblaZrEZefPdBrhxks";
+    return this.http.get(urlApi);
+  }
 
   getEstablishmentAddress(place: object | any): Promise<{ address; latitude; longitude }> {
     this.establishmentAddress = place['formatted_address'];
