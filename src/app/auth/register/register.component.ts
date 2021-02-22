@@ -2,8 +2,7 @@ import { GoogleGetaddressService } from './../../shared/googlemaps/google-places
 import { Router } from '@angular/router';
 import { AuthService } from './../services/auth.service';
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { User } from 'src/app/shared/model/user.interface';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -19,9 +18,12 @@ export class RegisterComponent implements OnInit {
     homeAdress: new FormControl(''),
     workAdress: new FormControl(''),
   });
-
+  liberarBotao:boolean = true;
+  contadorMetodos:number = 0;
   homeAdressLatLng: {address, latitude, longitude };
   workAdressLatLng: {address, latitude, longitude};
+  errorRegisterMessage:string;
+  verificaErrorForm:string;
 
 
   constructor(private authSvc: AuthService, private router: Router, private getaddr: GoogleGetaddressService) {}
@@ -29,6 +31,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   onGetAddressHome(place: object | any){
+   this.contadorMetodos++;
+   this.liberarBotao = this.verificaQuantMetodos();
    this.getaddr.getAddress(place).then(
      (coords) => {
       this.homeAdressLatLng = coords;
@@ -39,6 +43,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onGetAddressWork(place: object | any){
+    this.contadorMetodos++;
+    this.liberarBotao = this.verificaQuantMetodos();
     this.getaddr.getAddress(place).then(
       (coords) => {
        this.workAdressLatLng = coords;
@@ -48,9 +54,25 @@ export class RegisterComponent implements OnInit {
 
    }
 
-
+   verificaQuantMetodos(){
+    if(this.contadorMetodos != 1 && this.contadorMetodos !=0){
+     return false;
+    }
+      return true;
+  }
 
   async onRegister() {
+    let name = (<HTMLInputElement>document.getElementById('name')).value;
+    let telefone = (<HTMLInputElement>document.getElementById('telefone')).value;
+    console.log(name)
+    if(name==''){
+      this.verificaErrorForm = 'nome';
+      this.errorRegisterMessage = 'Verifique o campo digitado'
+    }else if(telefone==''){
+      this.verificaErrorForm = 'telefone';
+      this.errorRegisterMessage = 'Verifique o campo digitado'
+    }
+    else {
     try {
       const {
         email,
@@ -66,14 +88,24 @@ export class RegisterComponent implements OnInit {
         this.homeAdressLatLng,
         this.workAdressLatLng
       );
-      if (user) {
+      if (user && user.code == null) {
         this.router.navigate(['/verification-email']);
+      }else {
+        if(user == "auth/invalid-email"){
+          this.verificaErrorForm = 'email';
+          this.errorRegisterMessage = 'Email inválido';
+        }else if (user == "auth/email-already-in-use") {
+          this.verificaErrorForm = 'email';
+          this.errorRegisterMessage = 'Email em uso';
+        }
+        else {
+          this.verificaErrorForm = 'senha';
+          this.errorRegisterMessage = 'Senha fraca'
+        }
       }
     } catch (error) {
-      console.log(error);
     }
   }
-
-
+}
 
 }

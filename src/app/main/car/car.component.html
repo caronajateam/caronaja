@@ -1,0 +1,21 @@
+<div class="container mt-0 mb-5">
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints" ></agm-direction>
+</agm-map>
+  <h3>Carro do {{car.displayNameDriver}}</h3>
+  <h4>Numero do Motorista: {{car.numberDriver}}</h4>
+  <div class="card text-center mb-3 mx-2 box-room" *ngFor="let item of membersOfCar | async">
+    <div class="card-body">
+        <h5 class="card-title">
+            <span class="h3 card-name-dashboard text-truncate">{{item.displayName}}</span>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted mb-3 height-45px">
+            {{ item.homeAdress.address }}
+        </h6>
+        <a class="btn btn-outline-success ml-2 my-0" placement="bottom" ngbPopover="Compartilhar no App" triggers="mouseenter:mouseleave" href="https://api.whatsapp.com/send?phone={{item.number}}&text=Oi%2C%20eu%20sou%20seu%20motorista!!%2C%20prazer,%20{{car.displayNameDriver}}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+<hr class="bg-verde mb-4 mt-4 d-inline-block mx-auto ln-verde-2" />
+</div>
+
+

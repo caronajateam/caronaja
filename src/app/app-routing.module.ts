@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { RoomComponent } from './main/room/room.component';
+import { CarComponent } from './main/car/car.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,10 @@ const routes: Routes = [
   {
     path: 'room',
     component: RoomComponent
+  },
+  {
+    path: 'car',
+    component: CarComponent
   }
 ];
 

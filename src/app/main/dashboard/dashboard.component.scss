@@ -1,9 +1,49 @@
 .ln-red {
-  width: 100%;
-  height: 2px;
+    width: 100%;
+    height: 2px;
+}
+
+.bg-verde {
+    background-color: #49C5B1 !important;
 }
 
 .ln-red-2 {
-  width: 100%;
-  height: 1px;
+    width: 100%;
+    height: 1px;
+}
+
+.height-45px {
+    height: 45px;
+}
+
+.container-cards {
+    height: 234px;
+}
+
+.card-name-dashboard {
+    display: block;
+}
+
+.box-create-room {
+    min-height: 171px;
+    width: 31.5%;
+    float: left;
+}
+
+.box-create-room:hover {
+    background-color: rgba(249, 49, 84, 0.34);
+    transition: background .2s ease-in;
+    cursor: pointer;
+}
+
+.box-room {
+    min-height: 171px;
+
+    width: 31.5%;
+    float: left;
+}
+
+.box-room:hover {
+    transition: background .2s ease-in;
+    box-shadow: 0 0 12px rgba(249, 49, 84, 0.34);
 }

@@ -1,20 +1,24 @@
 .ln-sobre-site {
-  width: 103px;
-  height: 2px;
+    width: 103px;
+    height: 2px;
 }
 
 .ln-links-uteis {
-  width: 94px;
-  height: 2px;
+    width: 94px;
+    height: 2px;
 }
 
 .ln-contato {
-  width: 72px;
-  height: 2px;
+    width: 72px;
+    height: 2px;
+}
+
+.bg-verde {
+    background-color: #49C5B1 !important;
 }
 
 @media (min-width: 2px) {
-  .about-footer-mobile {
-    display: none;
-  }
+    .about-footer-mobile {
+        display: none;
+    }
 }

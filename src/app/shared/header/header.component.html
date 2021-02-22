@@ -1,22 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-  <div class="container-fluid d-flex">
-    <a class="navbar-brand font-weight-bold" href="/">CaronaJá</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      (click)="isMenuCollapsed = !isMenuCollapsed"
-    >
+<nav class="navbar navbar-expand-lg navbar-dark bg-verde">
+    <div class="container-fluid d-flex">
+        <a class="navbar-brand font-weight-bold" href="/">CaronaJá</a>
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
       &#9776;
     </button>
-    <div
-      [ngbCollapse]="isMenuCollapsed"
-      class="collapse navbar-collapse"
-      id="navbarSupportedContent"
-    >
-      <ul class="navbar-nav col-md-10">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/about"
-            ><i class="fas fa-address-card"></i>Sobre</a
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav col-md-10">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/about"><i class="fas fa-address-card"></i>Sobre</a
           >
         </li>
         <li class="nav-item">
@@ -39,14 +30,13 @@
         </li>
         <li class="nav-item-disabled">
           <a class="nav-link">{{ user?.email }}</a>
-        </li>
-      </ul>
-      <ng-template #login>
-        <div class="justify-content-end login-register">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/login"
-                ><i class="fas fa-sign-in-alt"></i>Entrar</a
+                </li>
+            </ul>
+            <ng-template #login>
+                <div class="justify-content-end login-register">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" routerLink="/login"><i class="fas fa-sign-in-alt"></i>Entrar</a
               >
             </li>
             <li class="nav-item">

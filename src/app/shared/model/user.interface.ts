@@ -12,5 +12,9 @@ export interface User{
   driver?: boolean;
   ride?: number;
   number?:string;
+  distance?:number;
+  distanceOrigin?:number;
+  distanceDestination?:number;
+  iconMap?:string;
 
 }

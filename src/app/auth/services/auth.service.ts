@@ -60,7 +60,7 @@ export class AuthService extends RoleValidator {
     number: string,
     homeAdress: {address, latitude, longitude },
     workAdress: {address, latitude, longitude}
-  ): Promise<User> {
+  ): Promise<any> {
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(
         email,
@@ -72,6 +72,7 @@ export class AuthService extends RoleValidator {
       return user;
     } catch (error) {
       console.log(error);
+      return error.code;
     }
   }
 
@@ -112,6 +113,7 @@ export class AuthService extends RoleValidator {
       homeAdress: homeAdress,
       workAdress: workAdress,
       role: 'ADMIN',
+      iconMap: 'https://marketingspot.com.br/cimages/Logo02.png'
     };
     return userRef.set(data, { merge: true });
   }

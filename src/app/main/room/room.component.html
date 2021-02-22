@@ -1,84 +1,80 @@
 <div class="container mt-0 mb-5">
-  <h1 class="mt-3 display-5 text-left">Sala (Nome da Sala)</h1>
-  <hr class="bg-danger mb-4 mt-0 d-inline-block mx-auto ln-red" />
-  <div class="container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Nome do Participante</th>
-          <th scope="col">Local Destino</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of members | async">
-          <td>{{ item.displayName }}</td>
-          <td>{{ item.homeAdress.address }}</td>
-          <div
-            class="btn-group btn-group-toggle"
-            ngbRadioGroup
-            name="radioBasic"
-            [(ngModel)]="item.driver"
-          >
-            <label ngbButtonLabel class="btn-primary">
-              <input
-                (click)="onDriveOrRide(item, 0)"
-                ngbButton
-                type="radio"
-                [value]="false"
-              />
-              Carona
-            </label>
-            <label ngbButtonLabel class="btn-primary">
-              <input ngbButton type="radio" [value]="true" /> Motorista
-            </label>
-            <div>
-              <div
-                *ngIf="item.driver == true"
-                class="btn-group"
-                ngbDropdown
-                role="group"
-                aria-label="Button group with nested dropdown"
-              >
-                <button class="btn btn-outline-primary" ngbDropdownToggle>
-                  Lugares: {{ item.ride }}
-                </button>
-                <div class="dropdown-menu" ngbDropdownMenu>
-                  <button ngbDropdownItem (click)="onDriveOrRide(item, 1)">
-                    1
-                  </button>
-                  <button ngbDropdownItem (click)="onDriveOrRide(item, 2)">
-                    2
-                  </button>
-                  <button ngbDropdownItem (click)="onDriveOrRide(item, 3)">
-                    3
-                  </button>
-                  <button ngbDropdownItem (click)="onDriveOrRide(item, 4)">
-                    4
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="admUserRoom; else wait">
-      <button class="btn btn-warning">
+    <h1 class="mt-3 display-5 text-left">Sala: {{roomComplete.roomName}}</h1>
+    <hr class="bg-verde mb-4 mt-0 d-inline-block mx-auto ln-verde" />
+    <agm-map  [latitude]="lat" [longitude]="lng"  [zoom]="12">
+      <agm-marker *ngFor="let item of members | async" [latitude]="item.homeAdress.latitude" [longitude]="item.homeAdress.longitude" [iconUrl]="item.iconMap" >
+        <agm-info-window>
+            <h2>{{item.displayName}}</h2>
+        </agm-info-window>
+    </agm-marker>
+    </agm-map>
+    <div class="container container-cards">
+        <div class="mb-3" *ngIf="admUserRoom; else wait">
+            <button class="btn btn-info btn-lg btn-block">
         <i class="fas fa-users mr-2"></i>Reunir Agora
       </button>
-    </div>
-    <button (click)="getDistanceOfTheMembers()">Teste</button>
+        </div>
 
-    <ng-template #wait>
-      <button
-        type="button"
-        class="btn btn-danger"
-        disabled
-        data-bs-toggle="button"
-      >
-        Aguarde o Administrador
+        <ng-template #wait>
+            <button type="button" class="btn btn-warning btn-lg btn-block mb-3" disabled data-bs-toggle="button">
+        <i class="fas fa-hourglass-half mr-2"></i>Aguarde o Administrador
       </button>
-    </ng-template>
-  </div>
+        </ng-template>
+
+        <div class="card text-center mb-3 mx-2 box-room" *ngFor="let item of members | async">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <span class="h3 card-name-dashboard text-truncate">{{
+            item.displayName
+          }}</span>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted mb-3 height-45px">
+                    {{ item.homeAdress.address }}
+                </h6>
+                <div class="btn-group btn-group-toggle d-flex justify-content-center" ngbRadioGroup name="radioBasic" [(ngModel)]="item.driver">
+                    <label ngbButtonLabel class="btn-primary btn-locals">
+            <input
+              (click)="onDriveOrRide(item, 0)"
+              ngbButton
+              type="radio"
+              [value]="false"
+            />
+            Carona
+          </label>
+                    <label ngbButtonLabel class="btn-primary btn-locals" *ngIf="item.driver == false">
+            <input
+              ngbButton
+              type="radio"
+              [value]="true"
+              (click)="onDriveOrRide(item, 1)"
+            />
+            Motorista
+          </label>
+                    <div>
+                        <div *ngIf="item.driver == true" class="btn-group" ngbDropdown role="group" aria-label="Lugares">
+                            <label class="btn btn-outline-primary btn-locals " ngbDropdownToggle>
+                Lugares: {{ item.ride }}
+              </label>
+                            <div class="dropdown-menu" ngbDropdownMenu>
+                                <button ngbDropdownItem (click)="onDriveOrRide(item, 1)">
+                  1
+                </button>
+                                <button ngbDropdownItem (click)="onDriveOrRide(item, 2)">
+                  2
+                </button>
+                                <button ngbDropdownItem (click)="onDriveOrRide(item, 3)">
+                  3
+                </button>
+                                <button ngbDropdownItem (click)="onDriveOrRide(item, 4)">
+                  4
+                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="bg-verde mb-4 mt-4 d-inline-block mx-auto ln-verde-2" />
 </div>

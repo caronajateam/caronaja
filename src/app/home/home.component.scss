@@ -1,4 +1,46 @@
 .ln-red {
-  width: 100%;
-  height: 2px;
+    width: 100%;
+    height: 2px;
+}
+
+.carousel-inner {
+    height: 450px;
+}
+
+.carousel-caption {
+    top: 140px;
+    color: #fff;
+    line-height: 0.5em;
+    letter-spacing: -0.041666667em;
+    font-family: "Greycliff CF Extra Bold";
+}
+
+.carousel-caption h1 {
+    font-size: 85px;
+}
+
+.container-comoUsar {
+    padding: 40px;
+    min-height: 550px;
+}
+
+.container-comoUsar h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 45px;
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.cardUsar-p {
+    font-size: 25px;
+    width: 75%;
+    margin: 35px auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.comoUsar {
+    width: 33%;
+    float: left;
+    text-align: center;
 }

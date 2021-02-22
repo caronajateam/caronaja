@@ -6,8 +6,10 @@ import {
 } from '@angular/fire/firestore';
 import { Room } from './../shared/model/room.interface';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { User } from '../shared/model/user.interface';
+import { Car } from '../shared/model/car.interface';
+import { FIREBASE_OPTIONS } from '@angular/fire';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,12 @@ export class MainService {
   users: Observable<User[]>;
   usersConvidado: Observable<User[]>;
   room: Observable<Room>;
+  car: Observable<Car>;
+  user: Observable<User[]>;
+  userCarMembers: Observable<User[]>;
   testeUser;
+  membersOfCarToShow: Observable<User[]>;
+
 
 
   private roomsCollection: AngularFirestoreCollection<Room>;
@@ -47,6 +54,7 @@ export class MainService {
   salvarUsuarioNaSala(user:User, uidRoom:string){
     user.driver = false;
     user.ride = 0;
+    user.distance = 0;
     this.afs.doc(`rooms/${uidRoom}/members/${user.uid}`).set(user);
   }
 
@@ -90,6 +98,14 @@ export class MainService {
     return this.testeUser;
   }
 
+  getOneUserFromRoom(uidUser: string, uidRoom:string){
+    return this.afs.collection('rooms').doc(uidRoom).collection('members').doc(uidUser).valueChanges();
+  }
+
+  getCar(uidUser: string, uidRoom:string){
+    return this.afs.collection('users').doc(uidUser).collection('rooms').doc(uidRoom).collection('car').doc(uidUser).valueChanges();
+  }
+
   membersOfRoom(uidRoom:string){
     this.users = this.afs.collection('rooms').doc(uidRoom).collection('members').valueChanges();
     return this.users;
@@ -122,6 +138,58 @@ export class MainService {
   updateRoom(item: User, uidRoom){
     this.afs.collection('rooms').doc(uidRoom).collection('members').doc(item.uid).set(item, { merge: true });
   }
+
+  async updateUserInRoom(car: Car, uidUser){
+    this.afs.collection('rooms').doc(car.uidRoomCar).collection('members').doc(uidUser).update({'distance': 1 });
+  }
+
+  updateUserInRoomZEROOO(uidRoom, uidUser){
+    return this.afs.collection('rooms').doc(uidRoom).collection('members').doc(uidUser).update({'distance': 0 });
+  }
+
+  getUserDriver(uidRoom){
+    this.user = this.afs.collection('rooms').doc(uidRoom).collection('members', (ref) =>
+    ref.where('driver', '==', true)).valueChanges();
+    return this.user;
+  }
+
+  getUserPassenger(uidRoom){
+    this.userCarMembers = this.afs.collection('rooms').doc(uidRoom).collection('members', (ref) =>
+    ref.where('driver', '==', false).where('distance', '==', 0)).valueChanges();
+    return this.userCarMembers;
+  }
+
+  getCars(uidRoom){
+    let cars: Observable<Car[]> = this.userCarMembers = this.afs.collection('rooms').doc(uidRoom).collection('cars').valueChanges();
+    return cars;
+  }
+
+  getMembersOfCar(uidRoom: string, uidUserRef:string){
+    this.membersOfCarToShow = this.afs.collection('users').doc(uidUserRef).collection('rooms').doc(uidRoom).collection('car').doc(uidUserRef).collection('carMembers').valueChanges();
+    return this.membersOfCarToShow;
+  }
+
+
+  getMembersOfCar2(uidRoom, uidUserRef){
+    let members = this.afs.collection('users').doc(uidUserRef).collection('rooms').doc(uidRoom).collection('car').valueChanges();
+    return members;
+
+}
+  saveUserMembersOfCar(userMembersOfCar: User[], uidRoom, car: Car){
+    this.afs.collection('rooms').doc(uidRoom).collection('cars').doc(car.uidDriver).set(car);
+    this.afs.collection('users').doc(car.uidDriver).collection('rooms').doc(uidRoom).collection('car').doc(car.uidDriver).set(car)
+    userMembersOfCar.forEach(element => {
+      this.afs.collection('rooms').doc(uidRoom).collection('cars').doc(car.uidDriver).collection('carMembers').add(element);
+      this.afs.collection('users').doc(car.uidDriver).collection('rooms').doc(uidRoom).collection('car').doc(car.uidDriver).collection('carMembers').add(element);
+      userMembersOfCar.forEach(element2 => {
+        this.afs.collection('users').doc(element.uid).collection('rooms').doc(uidRoom).collection('car').doc(element.uid).set(car)
+        this.afs.collection('users').doc(element.uid).collection('rooms').doc(uidRoom).collection('car').doc(element.uid).collection('carMembers').add(element2);
+      });
+    });
+  }
+
+
+
 
 
 }

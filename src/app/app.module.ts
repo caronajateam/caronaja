@@ -1,3 +1,4 @@
+
 import { RegisterComponent } from './auth/register/register.component';
 import { GooglePlacesComponent } from './shared/googlemaps/google-places/google-places.component';
 import { UserPathGuard } from './auth/user-path.guard';
@@ -22,8 +23,8 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { RoomComponent } from './main/room/room.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
+import { AgmDirectionModule } from 'agm-direction';
+import { CarComponent } from './main/car/car.component';
 
 
 
@@ -41,8 +42,7 @@ import { ContactComponent } from './contact/contact.component';
     HomeComponent,
     DashboardComponent,
     RoomComponent,
-    AboutComponent,
-    ContactComponent
+    CarComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +52,10 @@ import { ContactComponent } from './contact/contact.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyB43xdCiRB2Oe23bTblaZrEZefPdBrhxks'
+      apiKey:'AIzaSyB43xdCiRB2Oe23bTblaZrEZefPdBrhxks',
+      libraries: ['places', 'geometry']
     }),
+    AgmDirectionModule,
     HttpClientModule,
     FormsModule
 

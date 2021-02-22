@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit {
   userTeste: User;
   roomObservable:Observable<Room>;
   roomTeste:Room;
+  liberarBotao:boolean=false;
+  mensagemCopiar:string='Copiar';
 
   address:{address, latitude, longitude};
 
@@ -91,30 +93,40 @@ export class DashboardComponent implements OnInit {
 
 
   onGetEstablishmentAddress(place: object | any){
+    this.liberarBotao=true;
     this.getaddr.getEstablishmentAddress(place).then(
       (coords) => {
        this.address = coords;
         console.log(this.address);
       this.room.roomAdress = this.address;
+      this.liberarBotao = false;
       }
     )
    }
 
   onGetAddress(place: object | any){
+    this.liberarBotao=true;
     this.getaddr.getAddress(place).then(
       (coords) => {
        this.address = coords;
         console.log(this.address);
       this.room.roomAdress = this.address;
+      this.liberarBotao = false;
       }
     )
    }
+
+   openDelete(opendelete){
+    this.modalService.open(opendelete);
+    this.modalService.dismissAll();
+  }
 
   onSalvarSala() {
     this.room.uidUser = this.uidUserRef;
     this.uidRoom = this.mainSvc.salvarSala(this.room);
     this.mainSvc.salvarUsuarioNaSala(this.userTeste, this.uidRoom);
     this.mainSvc.salvarSalaNoUsuario(this.uidUserRef, this.room);
+    this.modalService.dismissAll();
   }
 
   open(content) {
@@ -128,7 +140,6 @@ export class DashboardComponent implements OnInit {
   onEntrarSalaViaWhats(){
 
   }
-
 
   onEntrarSalaUser(){
     this.navigationExtras.state.value = this.uidRoomEntrar;
@@ -144,6 +155,11 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['room'], this.navigationExtras)
     });
 
+  }
+
+  onGoToCar(room: Room){
+    this.navigationExtras.state.value = room.uidRoom;
+    this.router.navigate(['car'], this.navigationExtras);
   }
 
   onGoToRoom(item:any){
@@ -176,13 +192,29 @@ export class DashboardComponent implements OnInit {
   }
 
   onDelete(item:Room){
-    this.mainSvc.deleteRoom(item.uidRoom, this.uidUserRef);
+      this.mainSvc.deleteRoom(item.uidRoom, this.uidUserRef);
   }
 
   onSair(item:Room){
-    this.mainSvc.leaveRoom(item.uidRoom, this.uidUserRef);
+      this.mainSvc.leaveRoom(item.uidRoom, this.uidUserRef);
   }
 
+  copyMessage(val: string,item:Room){
+    this.mensagemCopiar = 'Copiado!'
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val+item.uidRoom;
+    document.getElementById('text-copy').appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.getElementById('text-copy').removeChild(selBox);
+  }
 
-
+  resetMensagem(){
+    this.mensagemCopiar = 'Copiar'
+  }
 }

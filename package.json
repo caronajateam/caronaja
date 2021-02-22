@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^9.0.0",
     "@popperjs/core": "^2.6.0",
     "@types/googlemaps": "^3.39.12",
+    "agm-direction": "^0.8.8",
     "bootstrap": "^4.5.3",
     "express": "^4.17.1",
     "firebase": "^8.2.3",
@@ -36,7 +37,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": ">= 0.900 < 0.1200",
-    "@angular-devkit/build-angular": "~0.1100.5",
+    "@angular-devkit/build-angular": "^0.1100.7",
     "@angular/cli": "~11.0.5",
     "@angular/compiler-cli": "~11.0.5",
     "@types/jasmine": "~3.6.0",
