@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
         this.workAdressLatLng
       );
       if (user && user.code == null) {
-        this.router.navigate(['/verification-email']);
+        this.router.navigate(['/dashboard']);
       }else {
         if(user == "auth/invalid-email"){
           this.verificaErrorForm = 'email';

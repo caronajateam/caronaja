@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     password : new FormControl(''),
   })
 
+  errorLogin:boolean = false;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,9 +29,9 @@ export class LoginComponent implements OnInit {
 
         this.router.navigate(['/dashboard'])
       } else if(user){
-        this.router.navigate(['/verification-email'])
+        this.router.navigate(['/dashboard'])
       } else{
-        this.router.navigate(['/register'])
+        this.errorLogin = true;
       }
     } catch (error) {
       console.log(error);

@@ -2,6 +2,9 @@
   <div class="card">
       <div class="card-body">
           <h1 class="text-center font-weight-bold">ENTRAR</h1>
+          <div class="errorLogin" *ngIf="errorLogin">
+            <p class="msgErrorLogin"> Houve um erro na hora de realizar login </p>
+          </div>
           <hr class="bg-verde mt-0 mb-2 d-inline-block mx-auto ln-red-2" />
           <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
               <div class="form-group">
