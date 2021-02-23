@@ -99,7 +99,6 @@ export class DashboardComponent implements OnInit {
        this.address = coords;
         console.log(this.address);
       this.room.roomAdress = this.address;
-      this.liberarBotao = false;
       }
     )
    }
@@ -111,7 +110,6 @@ export class DashboardComponent implements OnInit {
        this.address = coords;
         console.log(this.address);
       this.room.roomAdress = this.address;
-      this.liberarBotao = false;
       }
     )
    }

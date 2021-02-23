@@ -3,7 +3,7 @@
       <div class="card-body">
 
           <h1 class="text-center font-weight-bold">REGISTRAR</h1>
-          
+
           <hr class="bg-verde mt-0 mb-2 d-inline-block mx-auto ln-red-2" />
           <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
               <div class="form-group">
@@ -35,7 +35,7 @@
                   <GooglePlacesComponent (setAddress)="onGetAddressWork($event)" adressType="geocode"></GooglePlacesComponent>
               </div>
               <button type="submit" class="btn btn-verde btn-lg btn-block mt-3" [disabled]="liberarBotao">
-    Register
+    Registrar
   </button>
           </form>
           <div class="form-group mt-3">
