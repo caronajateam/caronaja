@@ -10,7 +10,7 @@
     </agm-map>
     <div class="container container-cards">
         <div class="mb-3" *ngIf="admUserRoom; else wait">
-            <button class="btn btn-info btn-lg btn-block">
+            <button class="btn btn-info btn-lg btn-block "(click)="onMatchCar()">
         <i class="fas fa-users mr-2"></i>Reunir Agora
       </button>
         </div>
