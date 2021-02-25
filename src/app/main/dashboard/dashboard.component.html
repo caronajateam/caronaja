@@ -21,7 +21,6 @@
           <i class="fas fa-trash"></i>
         </button>
         <div class="modal fade" id="deletarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -34,7 +33,7 @@
                                 <button type="button" class="btn btn-outline-dark" data-dismiss="modal">
                   Fechar
                 </button>
-                                <button type="button" class="btn btn-verde bg-verde" (click)="onDelete(item)" >
+                                <button type="button" class="btn btn-verde bg-verde" (click)="onDelete(item)" data-dismiss="modal">
                   Deletar
                 </button>
                             </div>
@@ -72,8 +71,12 @@
                             </div>
 
                             <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark" data-dismiss="modal">
+                                Fechar
+                              </button>
                                 <a class="btn btn-outline-success ml-2 my-0" placement="bottom" ngbPopover="Compartilhar no WhatsApp" triggers="mouseenter:mouseleave" href="https://wa.me/?text=Acesse%20nossa%20sala%20no%20site%20CaronaJ%C3%A1%20https%3A%2F%2Fcaronajaa.herokuapp.com%2Fdashboard%2F{{item.uidRoom}}" target="_blank"><i class="fab fa-whatsapp"></i>
-                </a>
+                                </a>
+
                             </div>
                         </div>
                     </div>
@@ -111,10 +114,30 @@
             <button type="button" class="btn btn-red btn-sm my-0" placement="bottom" ngbPopover="Entrar na Sala" triggers="mouseenter:mouseleave" (click)="onGoToRoom(objs)">
       <i class="fas fa-search"></i>
     </button>
-            <button type="button" class="btn btn-warning btn-sm ml-2 my-0" data-toggle="modal" data-target="#deletarModal" placement="bottom" ngbPopover="Deletar Sala" triggers="mouseenter:mouseleave">
+            <button type="button" class="btn btn-warning btn-sm ml-2 my-0" data-toggle="modal" data-target="#sairModal" placement="bottom" ngbPopover="Sair da sala" triggers="mouseenter:mouseleave">
       <i class="fas fa-trash"></i>
     </button>
 
+    <div class="modal fade" id="sairModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Deletar Sala</h5>
+              </div>
+              <div class="modal-body">
+                  Deseja sair da sala "{{ objs.roomName }}" ?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" data-dismiss="modal">
+    Fechar
+  </button>
+                  <button type="button" class="btn btn-verde bg-verde" (click)="onSair(objs)" data-dismiss="modal">
+    Sair
+  </button>
+              </div>
+          </div>
+      </div>
+      </div>
           </div>
         <button       type="button"
         class="btn bg-verde"
@@ -181,7 +204,7 @@
       <div class="modal-footer mb-0">
         <button
           type="button"
-          class="btn btn-outline-verde"
+          class="btn btn-outline-verde bg-verde"
           (click)="onEntrarSalaUser()"
           (click)="modal.close()"
         >

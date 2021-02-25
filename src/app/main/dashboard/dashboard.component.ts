@@ -125,6 +125,8 @@ export class DashboardComponent implements OnInit {
     this.mainSvc.salvarUsuarioNaSala(this.userTeste, this.uidRoom);
     this.mainSvc.salvarSalaNoUsuario(this.uidUserRef, this.room);
     this.modalService.dismissAll();
+    this.liberarBotao = false;
+    this.room.roomName = '';
   }
 
   open(content) {
