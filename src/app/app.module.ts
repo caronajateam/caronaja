@@ -52,7 +52,7 @@ import { CarComponent } from './main/car/car.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyB43xdCiRB2Oe23bTblaZrEZefPdBrhxks',
+      apiKey:'AAIzaSyCuIEMW_tf4jNrtJaaSsS02l9TzFvM6YN4',
       libraries: ['places', 'geometry']
     }),
     AgmDirectionModule,
