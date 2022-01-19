@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class RoleValidator {\n  isAdmin(user) {\n    return user.role === 'ADMIN';\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

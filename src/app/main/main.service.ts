@@ -3,13 +3,13 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreCollectionGroup,
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 import { Room } from './../shared/model/room.interface';
 import { Injectable } from '@angular/core';
 import { map, first } from 'rxjs/operators';
 import { User } from '../shared/model/user.interface';
 import { Car } from '../shared/model/car.interface';
-import { FIREBASE_OPTIONS } from '@angular/fire';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat/';
 
 @Injectable({
   providedIn: 'root',

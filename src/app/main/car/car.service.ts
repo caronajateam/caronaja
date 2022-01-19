@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/model/user.interface';
 import { Room } from 'src/app/shared/model/room.interface';
 import { Car } from 'src/app/shared/model/car.interface';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore'
 
 @Injectable({
   providedIn: 'root'
